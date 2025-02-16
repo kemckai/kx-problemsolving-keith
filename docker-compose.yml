@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  storage_service_1:
+    build: ./storage_service
+    container_name: storage_service_1
+    ports:
+      - "5001:5004"  # Map container port 5004 to host port 5001
+
+  storage_service_2:
+    build: ./storage_service
+    container_name: storage_service_2
+    ports:
+      - "5002:5004"  # Map container port 5004 to host port 5002
+
+  storage_service_3:
+    build: ./storage_service
+    container_name: storage_service_3
+    ports:
+      - "5003:5004"  # Map container port 5004 to host port 5003
+
+  gateway_service:
+    build: ./gateway_service
+    container_name: gateway_service
+    ports:
+      - "5000:5000"  # Map container port 5000 to host port 5000
+    depends_on:
+      - storage_service_1
+      - storage_service_2
+      - storage_service_3
