@@ -164,4 +164,3 @@ gateway-service
  handles signals to gracefully shut down the service and clean up resources.
 
 By following these steps, you can set up and run the distributed services, and understand the architecture and functionality of the project.
-```

@@ -2,28 +2,28 @@ version: '3.8'
 
 services:
   storage_service_1:
-    build: ./storage_service
+    build: ./storage-service
     container_name: storage_service_1
     ports:
-      - "5001:5004"  # Map container port 5004 to host port 5001
+      - "5001:5000"
 
   storage_service_2:
-    build: ./storage_service
+    build: ./storage-service
     container_name: storage_service_2
     ports:
-      - "5002:5004"  # Map container port 5004 to host port 5002
+      - "5002:5000"
 
   storage_service_3:
-    build: ./storage_service
+    build: ./storage-service
     container_name: storage_service_3
     ports:
-      - "5003:5004"  # Map container port 5004 to host port 5003
+      - "5003:5000"
 
   gateway_service:
-    build: ./gateway_service
+    build: ./gateway-service
     container_name: gateway_service
     ports:
-      - "5000:5000"  # Map container port 5000 to host port 5000
+      - "8081:8080"
     depends_on:
       - storage_service_1
       - storage_service_2
