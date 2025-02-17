@@ -78,33 +78,17 @@ docker-compose.yml
 
    - `Storage Service`: [http://localhost:5001](http://localhost:5001)
    - `Gateway Service`: [http://localhost:8081](http://localhost:8081)
-   - `Service 1`: [http://localhost:8081/service1](http://localhost:8081/service1)
+  
 
 ## Explanation
 
 ### Storage Service
 
-The 
-
-storage-service
-
- is a simple Flask application that provides a few endpoints. It serves an HTML page at the root endpoint, returns some dummy data at the `/data` endpoint, and provides a health check endpoint at `/health`.
+The storage-service is a simple Flask application that provides a few endpoints. It serves an HTML page at the root endpoint, returns some dummy data at the `/data` endpoint, and provides a health check endpoint at `/health`.
 
 ### Gateway Service
 
-The 
-
-gateway-service
-
- acts as a gateway to the 
-
-storage-service
-
-. It serves an HTML page at the root endpoint, another HTML page at the `/service1` endpoint, and proxies requests to the 
-
-storage-service
-
- at the `/service1/<path:path>` endpoint. It also provides a health check endpoint at `/health`.
+The gateway-service acts as a gateway to the storage-service. It serves an HTML page at the root endpoint, another HTML page at the `/service1` endpoint, and proxies requests to the storage-service at the `/service1/<path:path>` endpoint. It also provides a health check endpoint at `/health`.
 
 ### Docker Configuration
 
@@ -120,48 +104,20 @@ docker-compose.yml
 
 ### Additional Features
 
-- **Connection Pooling**: The 
-
-gateway-service
-
- uses a connection pool to maintain a pool of connections to the 
-
-storage-service
-
-.
-- **Health Checks**: The 
-
-gateway-service
-
- performs regular health checks on the 
-
-storage-service
-
-.
-- **Resource Monitoring**: The 
-
-gateway-service
-
- monitors CPU and memory usage.
-- **Background Tasks**: The 
-
-gateway-service
-
- performs background tasks such as data cleanup or cache invalidation.
-- **Keepalive Mechanisms**: The 
-
-gateway-service
-
- ensures that connections to the 
-
-storage-service
-
- remain active.
-- **Graceful Shutdown**: The 
-
-gateway-service
-
- handles signals to gracefully shut down the service and clean up resources.
+- **Connection Pooling**: The gateway-service uses a connection pool to maintain a pool of connections to the storage-service.
+- **Health Checks**: The gateway-service performs regular health checks on the storage-service.
+- **Resource Monitoring**: The gateway-service monitors CPU and memory usage.
+- **Background Tasks**: The gateway-service performs background tasks such as data cleanup or cache invalidation.
+- **Keepalive Mechanisms**: The gateway-service ensures that connections to the storage-service remain active.
+- **Graceful Shutdown**: The gateway-service handles signals to gracefully shut down the service and clean up resources.
+- **Circuit Breaker**:Prevent cascading failures in distributed systems.
+Improve application responsiveness by avoiding unnecessary calls to failing services.
+Enable quicker recovery from transient failures.
+- States: The circuit breaker typically operates in three states:
+Closed: All requests are allowed to pass through. The circuit breaker monitors for failures during this state.
+Open: When the failure threshold is reached, the circuit breaker trips, and all requests are blocked to prevent further strain on the failing service.
+Half-Open: After a predefined timeout, the circuit breaker transitions to this state, allowing a limited number of requests to check if the service has recovered.
+- **Alerts**- Slack and Email notification when Storage-services are unavailable
 
 By following these steps, you can set up and run the distributed services, and understand the architecture and functionality of the project.
 ```
