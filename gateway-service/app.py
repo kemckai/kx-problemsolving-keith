@@ -43,10 +43,10 @@ RECOVERY_TIMEOUT = 30  # seconds
 # Email configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-SMTP_USERNAME = "sparksailor7@gmail.com"
+SMTP_USERNAME = ""
 SMTP_PASSWORD = ""
-EMAIL_FROM = "sparksailor7@gmail.com"
-EMAIL_TO = "zvenczel@kx.com"
+EMAIL_FROM = ""
+EMAIL_TO = ""
 
 def send_email_notification(subject, message):
     msg = MIMEMultipart()
